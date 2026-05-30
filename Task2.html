@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Personal Portfolio Website">
+<meta name="keywords" content="Portfolio, Web Developer, HTML, CSS, Responsive Design">
+<meta name="author" content="Your Name">
+
+<title>Responsive Portfolio</title>
+
+<style>
+/* ==========================
+   CSS VARIABLES
+========================== */
+:root{
+    --bg-color:#ffffff;
+    --text-color:#222;
+    --card-bg:#f4f4f4;
+    --primary:#2563eb;
+    --shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.dark-theme{
+    --bg-color:#121212;
+    --text-color:#ffffff;
+    --card-bg:#1f1f1f;
+    --primary:#60a5fa;
+    --shadow:0 5px 15px rgba(255,255,255,0.1);
+}
+
+/* ==========================
+   GLOBAL STYLES
+========================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:var(--bg-color);
+    color:var(--text-color);
+    transition:.3s ease;
+}
+
+/* ==========================
+   HEADER
+========================== */
+header{
+    background:var(--primary);
+    color:white;
+    padding:1rem;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:1rem;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    font-weight:bold;
+}
+
+.theme-btn{
+    background:white;
+    color:var(--primary);
+    border:none;
+    padding:8px 15px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+/* ==========================
+   HERO SECTION
+========================== */
+.hero{
+    min-height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:2rem;
+}
+
+.hero-content h1{
+    font-size:3rem;
+    margin-bottom:1rem;
+}
+
+.hero-content p{
+    font-size:1.2rem;
+    margin-bottom:1rem;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 25px;
+    background:var(--primary);
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+/* ==========================
+   GRID LAYOUT
+========================== */
+.container{
+    width:90%;
+    margin:auto;
+    padding:3rem 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:2rem;
+    font-size:2rem;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+}
+
+.card{
+    background:var(--card-bg);
+    padding:20px;
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+/* ==========================
+   PROJECTS GRID
+========================== */
+.projects-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+}
+
+/* ==========================
+   FLEXBOX SKILLS
+========================== */
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    justify-content:center;
+}
+
+.skill{
+    background:var(--primary);
+    color:white;
+    padding:10px 20px;
+    border-radius:30px;
+}
+
+/* ==========================
+   CONTACT FORM
+========================== */
+form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    max-width:600px;
+    margin:auto;
+}
+
+input,
+textarea{
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+button{
+    padding:12px;
+    border:none;
+    background:var(--primary);
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+footer{
+    text-align:center;
+    padding:20px;
+    background:var(--card-bg);
+}
+
+/* ==========================
+   TABLET
+========================== */
+@media(min-width:768px){
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .projects-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+/* ==========================
+   DESKTOP
+========================== */
+@media(min-width:1024px){
+
+    .grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .projects-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .hero-content h1{
+        font-size:4rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<h2>My Portfolio</h2>
+
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+<button class="theme-btn" onclick="toggleTheme()">
+🌙 Theme
+</button>
+</nav>
+</header>
+
+<section class="hero">
+<div class="hero-content">
+<h1>Hello, I'm Praisy</h1>
+<p>Web Developer | Designer | Programmer</p>
+<a href="#projects" class="btn">View Projects</a>
+</div>
+</section>
+
+<section id="about" class="container">
+<h2 class="section-title">About Me</h2>
+
+<div class="grid">
+<div class="card">
+<h3>Education</h3>
+<p>B.Tech Student passionate about web technologies.</p>
+</div>
+
+<div class="card">
+<h3>Experience</h3>
+<p>Working on responsive websites and Python projects.</p>
+</div>
+
+<div class="card">
+<h3>Goals</h3>
+<p>Become a Full Stack Developer and Software Engineer.</p>
+</div>
+</div>
+</section>
+
+<section id="skills" class="container">
+<h2 class="section-title">Skills</h2>
+
+<div class="skills">
+<div class="skill">HTML5</div>
+<div class="skill">CSS3</div>
+<div class="skill">JavaScript</div>
+<div class="skill">Python</div>
+<div class="skill">SQL</div>
+<div class="skill">React</div>
+</div>
+</section>
+
+<section id="projects" class="container">
+<h2 class="section-title">Projects</h2>
+
+<div class="projects-grid">
+
+<div class="card">
+<h3>Portfolio Website</h3>
+<p>Responsive personal portfolio using HTML, CSS and JS.</p>
+</div>
+
+<div class="card">
+<h3>Library Management</h3>
+<p>Python-based file handling project.</p>
+</div>
+
+<div class="card">
+<h3>Data Analysis</h3>
+<p>Machine learning and visualization project.</p>
+</div>
+
+</div>
+</section>
+
+<section id="contact" class="container">
+<h2 class="section-title">Contact Me</h2>
+
+<form>
+<input type="text" placeholder="Your Name" required>
+
+<input type="email" placeholder="Your Email" required>
+
+<textarea rows="5" placeholder="Your Message"></textarea>
+
+<button type="submit">Send Message</button>
+</form>
+</section>
+
+<footer>
+<p>&copy; 2026 My Portfolio. All Rights Reserved.</p>
+</footer>
+
+<script>
+function toggleTheme(){
+document.body.classList.toggle("dark-theme");
+}
+</script>
+
+</body>
+</html>

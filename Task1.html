@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Personal Portfolio | John Doe</title>
+
+    <meta name="description" content="Accessible personal portfolio website showcasing skills, projects and contact information.">
+    <meta name="keywords" content="Portfolio, Web Developer, HTML5, Accessibility, SEO">
+    <meta name="author" content="John Doe">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, nav, main, section, article, footer {
+            padding: 20px;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            border-bottom: 1px solid #ddd;
+        }
+
+        form {
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            background: #f4f4f4;
+        }
+    </style>
+</head>
+
+<body>
+
+<header role="banner">
+    <h1>John Doe Portfolio</h1>
+
+    <nav aria-label="Main Navigation">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section id="about" aria-labelledby="about-heading">
+        <h2 id="about-heading">About Me</h2>
+        <p>
+            I am a passionate web developer interested in creating
+            accessible, responsive, and user-friendly websites using
+            modern web technologies.
+        </p>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Skills</h2>
+
+        <article>
+            <h3>Frontend Development</h3>
+            <p>HTML5, CSS3, JavaScript, Responsive Design</p>
+        </article>
+
+        <article>
+            <h3>Backend Development</h3>
+            <p>Python, Flask, Database Management</p>
+        </article>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
+
+        <article>
+            <h3>Portfolio Website</h3>
+            <p>Developed a responsive and accessible portfolio website.</p>
+        </article>
+
+        <article>
+            <h3>Task Management System</h3>
+            <p>Created a web application for managing daily tasks efficiently.</p>
+        </article>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Contact Me</h2>
+
+        <form aria-label="Contact Form">
+
+            <label for="name">Full Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                aria-required="true">
+
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                aria-required="true">
+
+            <label for="subject">Subject</label>
+            <input
+                type="text"
+                id="subject"
+                name="subject">
+
+            <label for="message">Message</label>
+            <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                aria-required="true"></textarea>
+
+            <button type="submit">Send Message</button>
+
+        </form>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 John Doe Portfolio. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

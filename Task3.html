@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    margin-top:50px;
+}
+.container{
+    width:500px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+input{
+    width:70%;
+    padding:10px;
+}
+button{
+    padding:10px;
+    cursor:pointer;
+}
+ul{
+    list-style:none;
+    padding:0;
+}
+li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#eee;
+    margin:10px 0;
+    padding:10px;
+    border-radius:5px;
+}
+.completed{
+    text-decoration:line-through;
+    color:gray;
+}
+.filters{
+    margin:15px 0;
+}
+.filters button{
+    margin-right:5px;
+}
+.active-filter{
+    background:black;
+    color:white;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📝 To-Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button onclick="addTask()">Add</button>
+
+    <div class="filters">
+        <button onclick="setFilter('all')" class="active-filter" id="allBtn">All</button>
+        <button onclick="setFilter('active')" id="activeBtn">Active</button>
+        <button onclick="setFilter('completed')" id="completedBtn">Completed</button>
+    </div>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let filter = "all";
+
+function saveTasks(){
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function addTask(){
+    const input = document.getElementById("taskInput");
+    const text = input.value.trim();
+
+    if(text === "") return;
+
+    tasks.push({
+        id: Date.now(),
+        text: text,
+        completed: false
+    });
+
+    input.value = "";
+    saveTasks();
+    renderTasks();
+}
+
+function deleteTask(id){
+    tasks = tasks.filter(task => task.id !== id);
+    saveTasks();
+    renderTasks();
+}
+
+function toggleTask(id){
+    tasks = tasks.map(task=>{
+        if(task.id === id){
+            task.completed = !task.completed;
+        }
+        return task;
+    });
+
+    saveTasks();
+    renderTasks();
+}
+
+function editTask(id){
+    const newText = prompt(
+        "Edit Task",
+        tasks.find(task=>task.id===id).text
+    );
+
+    if(newText && newText.trim() !== ""){
+        tasks = tasks.map(task=>{
+            if(task.id === id){
+                task.text = newText.trim();
+            }
+            return task;
+        });
+
+        saveTasks();
+        renderTasks();
+    }
+}
+
+function setFilter(type){
+
+    filter = type;
+
+    document.querySelectorAll(".filters button")
+    .forEach(btn => btn.classList.remove("active-filter"));
+
+    document.getElementById(type + "Btn")
+    .classList.add("active-filter");
+
+    renderTasks();
+}
+
+function renderTasks(){
+
+    const list = document.getElementById("taskList");
+    list.innerHTML = "";
+
+    let filtered = tasks;
+
+    if(filter === "active"){
+        filtered = tasks.filter(task => !task.completed);
+    }
+
+    if(filter === "completed"){
+        filtered = tasks.filter(task => task.completed);
+    }
+
+    filtered.forEach(task=>{
+
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+            <span class="${task.completed ? 'completed' : ''}">
+                ${task.text}
+            </span>
+
+            <div>
+                <button onclick="toggleTask(${task.id})">
+                    ${task.completed ? 'Undo' : 'Done'}
+                </button>
+
+                <button onclick="editTask(${task.id})">
+                    Edit
+                </button>
+
+                <button onclick="deleteTask(${task.id})">
+                    Delete
+                </button>
+            </div>
+        `;
+
+        list.appendChild(li);
+    });
+}
+
+renderTasks();
+
+</script>
+
+</body>
+</html>

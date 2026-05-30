@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Commerce Product Catalog</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#333;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+nav{
+    background:#444;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    padding:15px 20px;
+}
+
+nav a:hover{
+    background:#222;
+}
+
+.page{
+    display:none;
+    padding:20px;
+}
+
+.active{
+    display:block;
+}
+
+.hero{
+    text-align:center;
+    padding:40px;
+}
+
+.hero h1{
+    margin-bottom:10px;
+}
+
+.search-box{
+    text-align:center;
+    margin:20px 0;
+}
+
+.search-box input{
+    width:300px;
+    max-width:90%;
+    padding:10px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    padding:15px;
+    text-align:center;
+    box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.card h3{
+    margin:10px 0;
+}
+
+.card button{
+    background:#333;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.card button:hover{
+    background:#555;
+}
+
+#productDetail{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+#productDetail img{
+    width:100%;
+    max-width:400px;
+    display:block;
+    margin:auto;
+}
+
+.contact-form{
+    max-width:500px;
+    margin:auto;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+.contact-form button{
+    width:100%;
+    padding:10px;
+    background:#333;
+    color:white;
+    border:none;
+}
+
+footer{
+    background:#333;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:20px;
+}
+
+@media(max-width:600px){
+    nav{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>E-Commerce Product Catalog</h1>
+</header>
+
+<nav>
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('products')">Products</a>
+    <a href="#" onclick="showPage('about')">About</a>
+    <a href="#" onclick="showPage('contact')">Contact</a>
+</nav>
+
+<section id="home" class="page active">
+    <div class="hero">
+        <h1>Welcome to Our Store</h1>
+        <p>Browse amazing products at affordable prices.</p>
+    </div>
+</section>
+
+<section id="products" class="page">
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="search"
+            placeholder="Search products..."
+            onkeyup="displayProducts()">
+    </div>
+
+    <div class="products" id="productContainer"></div>
+
+</section>
+
+<section id="details" class="page">
+    <div id="productDetail"></div>
+</section>
+
+<section id="about" class="page">
+    <h2>About Us</h2>
+    <br>
+    <p>
+        This E-Commerce Product Catalog demonstrates modular web
+        architecture, client-side routing, responsive design,
+        and deployment-ready development practices.
+    </p>
+</section>
+
+<section id="contact" class="page">
+    <h2>Contact Us</h2>
+
+    <div class="contact-form">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button onclick="alert('Message Submitted Successfully!')">
+            Send Message
+        </button>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 E-Commerce Product Catalog</p>
+</footer>
+
+<script>
+
+const products = [
+
+{
+id:1,
+name:"Laptop",
+price:"₹50,000",
+image:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500",
+description:"High-performance laptop suitable for coding, gaming and productivity."
+},
+
+{
+id:2,
+name:"Smartphone",
+price:"₹25,000",
+image:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500",
+description:"Latest smartphone with advanced camera and battery life."
+},
+
+{
+id:3,
+name:"Headphones",
+price:"₹3,000",
+image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
+description:"Wireless headphones with crystal-clear sound quality."
+},
+
+{
+id:4,
+name:"Smart Watch",
+price:"₹4,500",
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",
+description:"Track health metrics and notifications on the go."
+},
+
+{
+id:5,
+name:"Camera",
+price:"₹35,000",
+image:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500",
+description:"Professional camera for photography enthusiasts."
+},
+
+{
+id:6,
+name:"Tablet",
+price:"₹20,000",
+image:"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500",
+description:"Portable tablet perfect for work and entertainment."
+}
+
+];
+
+function showPage(pageId){
+
+document.querySelectorAll('.page').forEach(page=>{
+page.classList.remove('active');
+});
+
+document.getElementById(pageId).classList.add('active');
+
+if(pageId==="products"){
+displayProducts();
+}
+}
+
+function displayProducts(){
+
+const search=document.getElementById('search').value.toLowerCase();
+
+const filtered=products.filter(product=>
+product.name.toLowerCase().includes(search)
+);
+
+const container=document.getElementById('productContainer');
+
+container.innerHTML="";
+
+filtered.forEach(product=>{
+
+container.innerHTML+=`
+<div class="card">
+<img src="${product.image}" alt="${product.name}">
+<h3>${product.name}</h3>
+<p>${product.price}</p>
+<button onclick="viewProduct(${product.id})">
+View Details
+</button>
+</div>
+`;
+
+});
+}
+
+function viewProduct(id){
+
+const product=products.find(p=>p.id===id);
+
+document.getElementById('productDetail').innerHTML=`
+
+<h2>${product.name}</h2>
+<br>
+
+<img src="${product.image}" alt="${product.name}">
+
+<br>
+
+<h3>Price: ${product.price}</h3>
+
+<br>
+
+<p>${product.description}</p>
+
+<br>
+
+<button onclick="showPage('products')">
+Back to Products
+</button>
+
+`;
+
+showPage('details');
+}
+
+displayProducts();
+
+</script>
+
+</body>
+</html>
